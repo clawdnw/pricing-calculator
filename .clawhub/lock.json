@@ -16,6 +16,10 @@
     "x-post-automation": {
       "version": "1.0.0",
       "installedAt": 1771222154286
+    },
+    "last30days-lite": {
+      "version": "1.0.0",
+      "installedAt": 1771259868765
     }
   }
 }

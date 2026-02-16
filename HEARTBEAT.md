@@ -10,9 +10,18 @@ Check `memory/heartbeat-state.json` for last-run times. Rotate through these —
 4. **Mission Control** — scan MC repo for stale tasks, update status if needed
 5. **QMD Index** — `qmd update` if >4h since last refresh
 
+## Proactive Work (do 1 per heartbeat if time allows)
+
+- Reverse prompt yourself: "What task can I do right now that moves us closer to $40K?"
+- Check memory/ for ideas Tyler texted — organize into ideas/research/drafts folders
+- If something failed recently, start building a fix
+- Draft or improve content (service offers, posts, docs)
+- Update MEMORY.md if daily files have unencoded learnings
+
 ## Rules
 
 - Late night (23:00-07:00 MST): HEARTBEAT_OK unless truly urgent
 - If nothing actionable: HEARTBEAT_OK
 - If alerting: send to current session (webchat) or Discord if webchat inactive
 - Log check timestamps to `memory/heartbeat-state.json`
+- Be an employee, not a monitor. Do work, don't just check things.

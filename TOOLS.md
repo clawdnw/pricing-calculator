@@ -48,10 +48,15 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 - `landing-page-generator` — generate landing pages for service offers
 - `x-post-automation` — X/Twitter post automation
 
-### Codex CLI
-- Path: `/Users/tylernw/.nvm/versions/node/v24.13.0/bin/codex`
-- Version: 0.98.0
-- Use for ALL coding tasks. Don't burn Claude tokens on implementation.
+### Brain/Muscle Architecture
+- **Brain (Opus):** Strategic thinking, planning, coordination, conversation. The expensive model.
+- **Muscles (cheap/free):** Use these for execution tasks to save Opus tokens:
+  - **Codex CLI** → ALL coding tasks. Path: `/Users/tylernw/.nvm/versions/node/v24.13.0/bin/codex` (v0.98.0)
+  - **Brave Search** → Web research (built into OpenClaw)
+  - **QMD** → Local file search (`qmd search "query"`)
+  - **summarize** → YouTube transcripts, URL summaries
+  - **gog** → Email/calendar/drive operations
+- **Rule:** If a task can be done by a muscle, use the muscle. Opus thinks, muscles do.
 
 ### Discord Server
 - Guild ID: `1468801612800851990`
