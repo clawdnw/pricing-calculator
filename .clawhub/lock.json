@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "skills": {
+    "qmd": {
+      "version": "1.0.0",
+      "installedAt": 1771222134623
+    },
+    "elite-longterm-memory": {
+      "version": "1.2.3",
+      "installedAt": 1771222136165
+    },
+    "landing-page-generator": {
+      "version": "1.0.0",
+      "installedAt": 1771222152957
+    },
+    "x-post-automation": {
+      "version": "1.0.0",
+      "installedAt": 1771222154286
+    }
+  }
+}
