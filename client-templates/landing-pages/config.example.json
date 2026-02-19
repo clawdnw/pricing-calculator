@@ -1,0 +1,190 @@
+{
+  "$schema": "./config.schema.json",
+  "_comment": "Landing Page Config - See README.md for full documentation",
+
+  "meta": {
+    "title": "Service Name - Tagline Here",
+    "description": "Brief description for SEO and social sharing (150-160 chars ideal)",
+    "favicon": null,
+    "author": "Your Brand",
+    "keywords": "keyword1, keyword2, keyword3",
+    "ogImage": "/og-image.jpg"
+  },
+
+  "_colorSchema": "Two options for defining colors - use ONE approach:",
+
+  "_option1_theme": {
+    "_note": "Simple theme format (recommended for quick setup)",
+    "theme": {
+      "mode": "dark",
+      "primary": "#6366f1",
+      "accent": "#8b5cf6",
+      "background": "#0a0a0f"
+    }
+  },
+
+  "_option2_branding": {
+    "_note": "Full branding format (more control, auto-detects light/dark mode)",
+    "branding": {
+      "companyName": "Your Brand",
+      "tagline": "Transform your business today",
+      "logo": "/logo.svg",
+      "colors": {
+        "primary": "#6366f1",
+        "secondary": "#8b5cf6",
+        "accent": "#10b981",
+        "text": "#e5e5e5",
+        "background": "#0a0a0f"
+      },
+      "fonts": {
+        "heading": "Inter",
+        "body": "Inter"
+      }
+    }
+  },
+
+  "brand": {
+    "name": "Your Brand",
+    "logo": null,
+    "tagline": "Transform your business today"
+  },
+
+  "sections": {
+    "hero": {
+      "enabled": true,
+      "headline": "Main Headline That Grabs Attention",
+      "subheadline": "Supporting text that explains the value proposition clearly",
+      "cta": {
+        "text": "Get Started",
+        "href": "#pricing"
+      },
+      "secondaryCta": {
+        "text": "Learn More",
+        "href": "#features"
+      },
+      "image": "/hero-image.jpg",
+      "features": ["Feature 1", "Feature 2", "Feature 3"]
+    },
+
+    "socialProof": {
+      "enabled": true,
+      "stats": [
+        { "value": "500+", "label": "Happy Clients" },
+        { "value": "48hr", "label": "Delivery Time" },
+        { "value": "100%", "label": "Satisfaction" }
+      ],
+      "testimonials": [
+        {
+          "quote": "Amazing work! Exceeded expectations.",
+          "author": "Client Name",
+          "role": "CEO, Company",
+          "image": "/testimonial.jpg"
+        }
+      ]
+    },
+
+    "features": {
+      "enabled": true,
+      "headline": "What You Get",
+      "items": [
+        {
+          "icon": "zap",
+          "title": "Lightning Fast",
+          "description": "Description of this feature and its benefit"
+        },
+        {
+          "icon": "shield",
+          "title": "Secure & Reliable",
+          "description": "Description of this feature and its benefit"
+        },
+        {
+          "icon": "star",
+          "title": "Premium Quality",
+          "description": "Description of this feature and its benefit"
+        },
+        {
+          "icon": "rocket",
+          "title": "Results Focused",
+          "description": "Description of this feature and its benefit"
+        }
+      ]
+    },
+
+    "pricing": {
+      "enabled": true,
+      "headline": "Simple Pricing",
+      "plans": [
+        {
+          "name": "Basic",
+          "price": "$299",
+          "period": "one-time",
+          "features": ["Feature 1", "Feature 2", "Feature 3"],
+          "cta": "Get Started",
+          "highlighted": false
+        },
+        {
+          "name": "Pro",
+          "price": "$499",
+          "period": "one-time",
+          "features": ["Everything in Basic", "Feature 4", "Feature 5", "Priority Support"],
+          "cta": "Get Started",
+          "highlighted": true
+        }
+      ],
+      "guarantee": "30-day money-back guarantee. No questions asked."
+    },
+
+    "testimonials": {
+      "enabled": true,
+      "headline": "What Clients Say",
+      "items": [
+        {
+          "quote": "Amazing work! Exceeded expectations.",
+          "author": "Client Name",
+          "role": "CEO, Company"
+        }
+      ]
+    },
+
+    "faq": {
+      "enabled": true,
+      "headline": "Frequently Asked Questions",
+      "items": [
+        {
+          "question": "How long does delivery take?",
+          "answer": "Typically 48-72 hours from project kickoff."
+        },
+        {
+          "question": "What if I need revisions?",
+          "answer": "Two rounds of revisions are included. Additional revisions available."
+        }
+      ]
+    },
+
+    "cta": {
+      "enabled": true,
+      "headline": "Ready to Get Started?",
+      "subheadline": "Let's build something amazing together",
+      "form": {
+        "action": "https://formspree.io/f/your-form-id",
+        "fields": [
+          { "name": "name", "type": "text", "placeholder": "Your Name", "required": true },
+          { "name": "email", "type": "email", "placeholder": "Email Address", "required": true }
+        ],
+        "submit": "Get Started",
+        "privacy": "We respect your privacy. No spam, ever."
+      }
+    }
+  },
+
+  "footer": {
+    "enabled": true,
+    "companyInfo": "Your Brand — Premium Services",
+    "links": [
+      { "text": "Privacy Policy", "href": "/privacy" },
+      { "text": "Terms of Service", "href": "/terms" },
+      { "text": "Contact", "href": "mailto:hello@example.com" }
+    ],
+    "copyright": "2026 Your Brand. All rights reserved."
+  }
+}
