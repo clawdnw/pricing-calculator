@@ -1,6 +1,11 @@
 ---
 name: last30days
-description: Research any topic across Reddit, X/Twitter, and the web from the last 30 days. Synthesizes findings into actionable insights or copy-paste prompts.
+description: >
+  Research any topic across Reddit, X/Twitter, and the web from the last 30 days. Synthesizes findings into actionable insights.
+  Use when: researching fast-moving topics, checking what's trending, validating ideas against current discourse, or finding real user opinions.
+  Don't use when: topic is evergreen/stable (just web_search). Don't use when: posting to X (use x-automation). Don't use when: doing competitor pricing research (use revenue-research skill).
+  Output: Synthesized findings with sources, patterns, and actionable next steps.
+  Anti-patterns: Searching too broadly, returning raw links without synthesis, ignoring Reddit signal-to-noise.
 metadata: {"clawdbot":{"emoji":"📅","requires":{"bins":["bird"]}}}
 ---
 

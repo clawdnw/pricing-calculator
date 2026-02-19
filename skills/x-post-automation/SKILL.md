@@ -1,6 +1,12 @@
 ---
 name: x-automation
-description: Automates the process of identifying trends on X (Twitter), generating opinionated/engaging content, and posting it. Use when asked to post to X, run X automation, or check trends for content creation.
+description: >
+  Automates identifying trends on X (Twitter), generating opinionated/engaging content, and posting.
+  Use when: asked to post to X, run X automation, check trends for content creation, or during scheduled X posting crons.
+  Don't use when: just researching a topic (use last30days or web_search). Don't use when: writing copy for non-X platforms (use copywriting).
+  Requires: Chrome browser relay with X tab attached.
+  Output: Published tweet + logged candidates. Notification of success/failure.
+  Anti-patterns: Posting without trend research, generic engagement-bait, posting during low-engagement hours.
 ---
 
 # X (Twitter) Automation Skill

@@ -1,6 +1,10 @@
 ---
 name: qmd
-description: Local search/indexing CLI (BM25 + vectors + rerank) with MCP mode.
+description: >
+  Local search/indexing CLI (BM25 + vectors + rerank) with MCP mode.
+  Use when: searching local markdown files, OpenClaw docs, or any indexed collection. Use when: need to find something in workspace files.
+  Don't use when: searching the web (use web_search). Don't use when: reading a specific known file (just read it).
+  Output: Ranked search results from local file collections.
 homepage: https://tobi.lutke.com
 metadata: {"clawdbot":{"emoji":"📝","requires":{"bins":["qmd"]},"install":[{"id":"node","kind":"node","package":"https://github.com/tobi/qmd","bins":["qmd"],"label":"Install qmd (node)"}]}}
 ---

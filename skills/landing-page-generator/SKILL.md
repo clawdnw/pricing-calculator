@@ -1,6 +1,12 @@
 ---
 name: landing-page-generator
-description: Generate high-converting landing pages for products, services, and lead generation. Use when creating marketing pages, product launches, squeeze pages, or digital asset sales pages.
+description: >
+  Generate high-converting landing pages for products, services, and lead generation.
+  Use when: creating marketing pages, product launches, squeeze pages, or digital asset sales pages.
+  Don't use when: writing copy only (use copywriting skill). Don't use when: building app UI/dashboards (use code-standards + ui-ux-design).
+  Output: Complete HTML/CSS landing page files ready for deployment.
+  Success criteria: Page loads fast, converts visitors, looks premium, works on mobile.
+  Anti-patterns: Generic templates without customization, missing CTAs, no social proof, slow-loading pages.
 ---
 
 # Landing Page Generator
