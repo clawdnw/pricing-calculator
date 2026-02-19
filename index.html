@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Pricing Calculator | NW Global Enterprise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent: #a855f7;
+            --accent-light: #c084fc;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --border: #27272a;
+            --border-light: #3f3f46;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .calculator {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .section {
+            padding: 24px 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        /* Service Type Selection */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .service-option {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .service-option input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .service-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 16px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .service-option label:hover {
+            border-color: var(--border-light);
+            background: var(--bg-card);
+        }
+
+        .service-option input:checked + label {
+            border-color: var(--accent);
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .service-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .service-price {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Feature Checkboxes */
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .feature-item:hover {
+            background: var(--bg-card);
+        }
+
+        .feature-item.selected {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid var(--accent);
+        }
+
+        .feature-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-light);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .feature-item.selected .feature-checkbox {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .feature-checkbox svg {
+            width: 14px;
+            height: 14px;
+            stroke: white;
+            stroke-width: 3;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .feature-item.selected .feature-checkbox svg {
+            opacity: 1;
+        }
+
+        .feature-name {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .feature-price {
+            font-size: 0.85rem;
+            color: var(--accent-light);
+            font-weight: 500;
+        }
+
+        /* Timeline */
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .timeline-option {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .timeline-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .timeline-option label {
+            display: block;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .timeline-option label:hover {
+            border-color: var(--border-light);
+        }
+
+        .timeline-option input:checked + label {
+            border-color: var(--accent);
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .timeline-label {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .timeline-multiplier {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Price Display */
+        .price-display {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(34, 197, 94, 0.1) 100%);
+            padding: 32px;
+            text-align: center;
+        }
+
+        .price-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .price-range {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .price-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--success) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .price-separator {
+            font-size: 2rem;
+            color: var(--text-muted);
+        }
+
+        .price-breakdown {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .breakdown-item {
+            text-align: center;
+        }
+
+        .breakdown-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .breakdown-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 4px;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 24px 32px;
+            text-align: center;
+            background: var(--bg-secondary);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+        }
+
+        .disclaimer {
+            margin-top: 16px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.75rem;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .price-value {
+                font-size: 2.5rem;
+            }
+
+            .price-breakdown {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .calculator {
+            animation: fadeIn 0.4s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Project Pricing Calculator</h1>
+            <p>Get an instant estimate for your project. Select your service type and features.</p>
+        </header>
+
+        <div class="calculator">
+            <!-- Service Type -->
+            <div class="section">
+                <div class="section-title">Service Type</div>
+                <div class="service-grid">
+                    <div class="service-option">
+                        <input type="radio" name="service" id="landing" value="landing" checked>
+                        <label for="landing">
+                            <span class="service-icon">📄</span>
+                            <span class="service-name">Landing Page</span>
+                            <span class="service-price">$300 - $600</span>
+                        </label>
+                    </div>
+                    <div class="service-option">
+                        <input type="radio" name="service" id="bot" value="bot">
+                        <label for="bot">
+                            <span class="service-icon">🤖</span>
+                            <span class="service-name">Discord Bot</span>
+                            <span class="service-price">$150 - $400</span>
+                        </label>
+                    </div>
+                    <div class="service-option">
+                        <input type="radio" name="service" id="consulting" value="consulting">
+                        <label for="consulting">
+                            <span class="service-icon">💡</span>
+                            <span class="service-name">AI Consulting</span>
+                            <span class="service-price">$150 - $300/hr</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="section">
+                <div class="section-title">Features & Add-ons</div>
+                <div class="feature-list" id="featureList">
+                    <!-- Features populated by JS based on service type -->
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="section">
+                <div class="section-title">Timeline</div>
+                <div class="timeline-grid">
+                    <div class="timeline-option">
+                        <input type="radio" name="timeline" id="standard" value="standard" checked>
+                        <label for="standard">
+                            <div class="timeline-label">Standard</div>
+                            <div class="timeline-multiplier">5-7 days</div>
+                        </label>
+                    </div>
+                    <div class="timeline-option">
+                        <input type="radio" name="timeline" id="express" value="express">
+                        <label for="express">
+                            <div class="timeline-label">Express</div>
+                            <div class="timeline-multiplier">2-3 days (+50%)</div>
+                        </label>
+                    </div>
+                    <div class="timeline-option">
+                        <input type="radio" name="timeline" id="rush" value="rush">
+                        <label for="rush">
+                            <div class="timeline-label">Rush</div>
+                            <div class="timeline-multiplier">24-48h (+100%)</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Price Display -->
+            <div class="price-display">
+                <div class="price-label">Estimated Project Cost</div>
+                <div class="price-range">
+                    <span class="price-value" id="priceLow">$300</span>
+                    <span class="price-separator">—</span>
+                    <span class="price-value" id="priceHigh">$600</span>
+                </div>
+                <div class="price-breakdown">
+                    <div class="breakdown-item">
+                        <div class="breakdown-label">Base Price</div>
+                        <div class="breakdown-value" id="basePrice">$300-600</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-label">Features</div>
+                        <div class="breakdown-value" id="featuresPrice">$0</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-label">Timeline</div>
+                        <div class="breakdown-value" id="timelineMultiplier">Standard</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-section">
+                <a href="mailto:clawdnw@gmail.com?subject=Project Inquiry from Pricing Calculator" class="cta-button">
+                    Get Started
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <p class="disclaimer">Final price may vary based on project complexity. Free consultation included.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Pricing data
+        const pricing = {
+            landing: {
+                baseLow: 300,
+                baseHigh: 600,
+                features: [
+                    { name: 'Responsive Design', price: 0, included: true },
+                    { name: 'Contact Form', price: 50 },
+                    { name: 'SEO Optimization', price: 75 },
+                    { name: 'Animations & Interactions', price: 100 },
+                    { name: 'CMS Integration', price: 150 },
+                    { name: 'Analytics Setup', price: 50 },
+                    { name: 'Custom Domain Help', price: 0 },
+                    { name: 'Revision Rounds (3 included)', price: 0 }
+                ]
+            },
+            bot: {
+                baseLow: 150,
+                baseHigh: 400,
+                features: [
+                    { name: 'Basic Commands', price: 0, included: true },
+                    { name: 'Welcome Messages', price: 25 },
+                    { name: 'Auto-moderation', price: 75 },
+                    { name: 'Custom Commands (5+)', price: 50 },
+                    { name: 'Role Management', price: 50 },
+                    { name: 'Logging System', price: 40 },
+                    { name: 'Database Integration', price: 100 },
+                    { name: 'API Integrations', price: 150 }
+                ]
+            },
+            consulting: {
+                baseLow: 150,
+                baseHigh: 300,
+                hourly: true,
+                features: [
+                    { name: 'Strategy Session', price: 0, included: true },
+                    { name: 'Implementation Guidance', price: 0 },
+                    { name: 'Code Review', price: 0 },
+                    { name: 'Documentation', price: 50 },
+                    { name: 'Follow-up Support', price: 75 }
+                ]
+            }
+        };
+
+        let selectedService = 'landing';
+        let selectedFeatures = new Set();
+        let selectedTimeline = 'standard';
+
+        // DOM elements
+        const featureList = document.getElementById('featureList');
+        const priceLow = document.getElementById('priceLow');
+        const priceHigh = document.getElementById('priceHigh');
+        const basePriceEl = document.getElementById('basePrice');
+        const featuresPriceEl = document.getElementById('featuresPrice');
+        const timelineMultiplierEl = document.getElementById('timelineMultiplier');
+
+        // Initialize
+        function init() {
+            // Service type listeners
+            document.querySelectorAll('input[name="service"]').forEach(input => {
+                input.addEventListener('change', (e) => {
+                    selectedService = e.target.value;
+                    selectedFeatures.clear();
+                    renderFeatures();
+                    updatePrice();
+                });
+            });
+
+            // Timeline listeners
+            document.querySelectorAll('input[name="timeline"]').forEach(input => {
+                input.addEventListener('change', (e) => {
+                    selectedTimeline = e.target.value;
+                    updatePrice();
+                });
+            });
+
+            renderFeatures();
+            updatePrice();
+        }
+
+        function renderFeatures() {
+            const servicePricing = pricing[selectedService];
+            featureList.innerHTML = '';
+
+            servicePricing.features.forEach((feature, index) => {
+                const featureId = `feature-${index}`;
+                const isSelected = feature.included || selectedFeatures.has(index);
+
+                const item = document.createElement('div');
+                item.className = `feature-item ${isSelected ? 'selected' : ''}`;
+                item.innerHTML = `
+                    <div class="feature-left">
+                        <div class="feature-checkbox">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <span class="feature-name">${feature.name}</span>
+                    </div>
+                    <span class="feature-price">${feature.price === 0 ? (feature.included ? 'Included' : 'Free') : `+$${feature.price}`}</span>
+                `;
+
+                if (!feature.included) {
+                    item.addEventListener('click', () => {
+                        if (selectedFeatures.has(index)) {
+                            selectedFeatures.delete(index);
+                            item.classList.remove('selected');
+                        } else {
+                            selectedFeatures.add(index);
+                            item.classList.add('selected');
+                        }
+                        updatePrice();
+                    });
+                }
+
+                featureList.appendChild(item);
+            });
+        }
+
+        function updatePrice() {
+            const servicePricing = pricing[selectedService];
+            let baseLow = servicePricing.baseLow;
+            let baseHigh = servicePricing.baseHigh;
+
+            // Add feature costs
+            let featureCost = 0;
+            selectedFeatures.forEach(index => {
+                featureCost += servicePricing.features[index].price;
+            });
+
+            // Apply timeline multiplier
+            let multiplier = 1;
+            let timelineText = 'Standard';
+            if (selectedTimeline === 'express') {
+                multiplier = 1.5;
+                timelineText = '+50%';
+            } else if (selectedTimeline === 'rush') {
+                multiplier = 2;
+                timelineText = '+100%';
+            }
+
+            const totalLow = Math.round((baseLow + featureCost) * multiplier);
+            const totalHigh = Math.round((baseHigh + featureCost) * multiplier);
+
+            // Update display
+            if (servicePricing.hourly) {
+                priceLow.textContent = `$${totalLow}`;
+                priceHigh.textContent = `$${totalHigh}/hr`;
+                basePriceEl.textContent = `$${baseLow}-${baseHigh}/hr`;
+            } else {
+                priceLow.textContent = `$${totalLow}`;
+                priceHigh.textContent = `$${totalHigh}`;
+                basePriceEl.textContent = `$${baseLow}-${baseHigh}`;
+            }
+
+            featuresPriceEl.textContent = featureCost > 0 ? `+$${featureCost}` : '$0';
+            timelineMultiplierEl.textContent = timelineText;
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
